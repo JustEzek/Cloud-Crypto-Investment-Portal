@@ -124,19 +124,6 @@ npm run dev
 http://localhost:5173
 ```
 
-## Demo Flow For Presentation
-
-1. Start on the home page and explain the multi-tier design: React frontend, Express web server, MySQL database.
-2. Log in as `alice` with `password123`.
-3. Show that Alice only sees her own investments.
-4. Log out.
-5. Log in as `erin` with `employee123`.
-6. Show that Erin can see all investment rows because she is an employee.
-7. Click "Connect MetaMask" and approve the wallet connection in MetaMask.
-8. Explain that the wallet address is sent to the backend and saved through Sequelize.
-9. Mention Docker Compose runs the same services locally that could be deployed to an AWS EC2 Ubuntu instance.
-
-See [docs/demo-script.md](docs/demo-script.md) for a short speaking script.
 
 ## API Overview
 
@@ -156,17 +143,4 @@ HTTP is stateless, so the backend uses `express-session`. After login, the serve
 ## AWS Deployment Notes
 
 For AWS, create an Ubuntu EC2 instance, open HTTP port 80 and SSH port 22, install Docker, copy this repository to the server, configure `.env`, and run `docker compose up --build -d`. More details are in [docs/aws-deployment.md](docs/aws-deployment.md).
-
-## GitHub Submission Instructions
-
-```bash
-git init
-git add .
-git commit -m "Final project cloud crypto investment portal"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/cloud-crypto-investment-portal.git
-git push -u origin main
-```
-
-Replace `YOUR_USERNAME` with your GitHub username and create the empty repository on GitHub first.
 
