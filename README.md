@@ -142,5 +142,5 @@ HTTP is stateless, so the backend uses `express-session`. After login, the serve
 
 ## AWS Deployment Notes
 
-For AWS, create an Ubuntu EC2 instance, open HTTP port 80 and SSH port 22, install Docker, copy this repository to the server, configure `.env`, and run `docker compose up --build -d`. More details are in [docs/aws-deployment.md](docs/aws-deployment.md).
+This repository is AWS-ready but not currently live-hosted on AWS. For AWS deployment, create an Ubuntu EC2 instance, open HTTP port 80 and SSH port 22, install Docker, copy this repository to the server, configure .env, and run docker compose up --build -d. More details are in aws-deployment.md.
 
