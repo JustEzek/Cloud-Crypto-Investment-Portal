@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cloud Crypto Investment Portal Demo</title>
+    <style>
+      :root {
+        --ink: #17202f;
+        --muted: #627181;
+        --line: #d9e5e1;
+        --green: #15616d;
+        --blue: #294c60;
+        --orange: #b75d36;
+      }
+
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Arial, sans-serif; background: #f3f7f6; color: var(--ink); }
+      main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0; }
+      header, section { background: white; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 12px 28px rgba(33,53,71,.08); }
+      header { min-height: 280px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; padding: 30px; margin-bottom: 16px; overflow: hidden; }
+      section { padding: 20px; margin-bottom: 16px; }
+      h1, h2, p { margin: 0; }
+      h1 { font-size: clamp(34px, 5vw, 58px); line-height: 1; max-width: 720px; }
+      h2 { font-size: 22px; }
+      p { color: var(--muted); margin-top: 8px; line-height: 1.45; }
+      button { min-height: 42px; border: 0; border-radius: 6px; padding: 0 14px; background: var(--green); color: white; cursor: pointer; margin-right: 8px; font-weight: 700; }
+      button.secondary { background: var(--blue); }
+      button.light { background: #eef3f2; color: #243447; }
+      table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+      th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid #edf1ef; }
+      th { color: var(--muted); font-size: 13px; }
+      .hero-copy { display: grid; gap: 16px; }
+      .hero-actions, .row, .badges { display: flex; gap: 10px; flex-wrap: wrap; }
+      .badge { display: inline-flex; align-items: center; min-height: 30px; background: #eef3f2; border: 1px solid #d7e1de; padding: 5px 9px; border-radius: 6px; color: #243447; font-size: 13px; }
+      .badge.hot { background: #fff4ee; border-color: #ffd7bf; color: #8b3b1f; }
+      .crypto-card { background: linear-gradient(135deg, #f7fbfa, #e8f4f0); padding: 20px; border-radius: 8px; border: 1px solid var(--line); }
+      .coin { width: 160px; height: 160px; border-radius: 50%; margin: 0 auto 18px; background: radial-gradient(circle at 35% 30%, #fff3c7, #e0a72e 45%, #8d6116); display: grid; place-items: center; color: white; font-size: 64px; font-weight: 900; box-shadow: 0 22px 44px rgba(141,97,22,.28); }
+      .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .metric { padding: 14px; background: white; border: 1px solid var(--line); border-radius: 8px; }
+      .metric strong { display: block; font-size: 20px; }
+      .status { background: #eaf7f1; color: #215044; font-weight: 700; }
+      .layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 16px; align-items: start; }
+      .stack { display: grid; gap: 16px; }
+      .architecture { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 14px; }
+      .arch-node { min-height: 96px; display: grid; place-items: center; text-align: center; padding: 12px; background: #f9fbfb; border: 1px solid var(--line); border-radius: 8px; font-weight: 700; }
+      .arch-node span { display: block; color: var(--muted); font-size: 12px; font-weight: 400; margin-top: 4px; }
+      .wallet { min-height: 52px; padding: 12px; background: #f8faf9; border: 1px solid var(--line); border-radius: 8px; word-break: break-all; color: #334155; }
+      .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+      .summary-card { background: #f8faf9; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+      .summary-card strong { display: block; font-size: 20px; }
+      .activity { display: grid; gap: 8px; margin-top: 14px; }
+      .activity div { display: flex; justify-content: space-between; gap: 12px; padding: 10px; background: #f8faf9; border: 1px solid var(--line); border-radius: 8px; }
+      .terminal { background: #17202f; color: #d7f8ec; padding: 16px; border-radius: 8px; font-family: Consolas, monospace; font-size: 14px; line-height: 1.6; }
+      .terminal span { color: #7dd3fc; }
+      .callout { border-left: 4px solid var(--orange); }
+      @media (max-width: 860px) {
+        header, .layout { grid-template-columns: 1fr; }
+        .architecture, .mini-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="hero-copy">
+          <div>
+            <div class="badges">
+              <span class="badge hot">Final Project Demo</span>
+              <span class="badge">AWS-ready</span>
+              <span class="badge">Session Protected</span>
+              <span class="badge">Alchemy + Ethereum</span>
+            </div>
+            <h1>Cloud Crypto Investment Portal</h1>
+            <p>A full-stack investment dashboard using React, an Express web server, Sequelize, MySQL, Docker, AWS deployment concepts, MetaMask, Ethereum, and Alchemy.</p>
+          </div>
+          <div class="hero-actions">
+            <button onclick="login('Alice Rivera','Customer')">Demo Customer</button>
+            <button onclick="login('Erin Patel','Employee')" class="secondary">Demo Employee</button>
+            <button onclick="logout()" class="light">Reset Session</button>
+          </div>
+        </div>
+        <div class="crypto-card">
+          <div class="coin">ETH</div>
+          <div class="mini-grid">
+            <div class="metric"><strong>$18.9K</strong><p>Total USD</p></div>
+            <div class="metric"><strong>4.70</strong><p>Total ETH</p></div>
+            <div class="metric"><strong>2 roles</strong><p>Access levels</p></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="status" id="status">Not logged in. Investment data is protected by the server session.</section>
+
+      <section>
+        <h2>System Architecture</h2>
+        <p>The real repository separates the browser, web server, database, Ethereum provider, and cloud deployment pieces.</p>
+        <div class="architecture">
+          <div class="arch-node">React<span>HTML/CSS UI</span></div>
+          <div class="arch-node">Express<span>Web server/API</span></div>
+          <div class="arch-node">Sequelize<span>ORM models</span></div>
+          <div class="arch-node">MySQL<span>Users + investments</span></div>
+          <div class="arch-node">AWS<span>Ubuntu + Docker</span></div>
+        </div>
+      </section>
+
+      <div class="layout">
+        <div class="stack">
+          <section>
+            <h2>Demo Controls</h2>
+            <p>Switch roles to show how the server session changes what data is returned.</p>
+            <div class="row">
+              <button onclick="login('Alice Rivera','Customer')">Login as Alice</button>
+              <button onclick="login('Erin Patel','Employee')" class="secondary">Login as Erin</button>
+              <button onclick="logout()" class="light">Logout</button>
+            </div>
+          </section>
+
+          <section class="callout">
+            <h2>MetaMask / Ethereum</h2>
+            <p>MetaMask connects the wallet. If the browser blocks MetaMask, this demo can simulate the saved Ethereum address while the full React source uses the real extension.</p>
+            <p class="wallet" id="wallet">No wallet connected yet.</p>
+            <button onclick="connectWallet()">Connect MetaMask</button>
+            <button onclick="simulateWallet()" class="light">Use Demo Wallet</button>
+            <button onclick="syncAlchemy()" class="secondary">Sync Alchemy</button>
+          </section>
+
+          <section>
+            <h2>Cloud Run Commands</h2>
+            <div class="terminal">
+              <div><span>$</span> docker compose up --build</div>
+              <div><span>$</span> docker compose exec backend npm run seed</div>
+              <div><span>$</span> open http://localhost:5173</div>
+            </div>
+          </section>
+        </div>
+
+        <section>
+          <h2>Investment Balances</h2>
+          <p id="explain">Log in to display protected investment records.</p>
+          <div class="summary-grid" id="summary"></div>
+          <div id="table"></div>
+          <h2 style="margin-top:22px">Session Activity</h2>
+          <div class="activity" id="activity">
+            <div><span>Protected route</span><strong>Waiting for login</strong></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const rows = [
+        ['Alice Rivera', 'Customer', '$12,500.75', '0.2450', '3.5000', 'EUR 9,100.25'],
+        ['Bob Chen', 'Customer', '$6,400.00', '0.0800', '1.2000', 'EUR 4,200.00']
+      ];
+
+      function render(records) {
+        const usd = records.reduce((total, r) => total + Number(r[2].replace(/[$,]/g, '')), 0);
+        const eth = records.reduce((total, r) => total + Number(r[4]), 0);
+        document.getElementById('summary').innerHTML = `
+          <div class="summary-card"><strong>${records.length}</strong><p>Visible records</p></div>
+          <div class="summary-card"><strong>$${usd.toLocaleString()}</strong><p>Visible USD</p></div>
+          <div class="summary-card"><strong>${eth.toFixed(2)}</strong><p>Visible ETH</p></div>
+          <div class="summary-card"><strong>Active</strong><p>Server session</p></div>`;
+        document.getElementById('table').innerHTML = `
+          <table>
+            <thead><tr><th>User</th><th>Role</th><th>USD</th><th>BTC</th><th>ETH</th><th>EUR</th></tr></thead>
+            <tbody>${records.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+          </table>`;
+      }
+
+      function login(name, role) {
+        document.getElementById('status').textContent = `${name} is logged in as ${role}. Session access is active.`;
+        document.getElementById('explain').textContent = role === 'Customer'
+          ? 'Customer view: the backend uses the session and returns only Alice investment data.'
+          : 'Employee view: the backend sees the employee role and returns all investment records.';
+        render(role === 'Customer' ? [rows[0]] : rows);
+        document.getElementById('activity').innerHTML = role === 'Customer'
+          ? `<div><span>POST /api/auth/login</span><strong>alice session created</strong></div>
+             <div><span>GET /api/investments</span><strong>1 customer row returned</strong></div>
+             <div><span>Access rule</span><strong>Customer can see self only</strong></div>`
+          : `<div><span>POST /api/auth/login</span><strong>erin session created</strong></div>
+             <div><span>GET /api/investments</span><strong>All rows returned</strong></div>
+             <div><span>Access rule</span><strong>Employee can audit customers</strong></div>`;
+      }
+
+      function logout() {
+        document.getElementById('status').textContent = 'Not logged in. Investment data is protected by the server session.';
+        document.getElementById('explain').textContent = 'Log in to display protected investment records.';
+        document.getElementById('table').innerHTML = '';
+        document.getElementById('summary').innerHTML = '';
+        document.getElementById('activity').innerHTML = '<div><span>Protected route</span><strong>Waiting for login</strong></div>';
+      }
+
+      async function connectWallet() {
+        if (!window.ethereum) {
+          document.getElementById('wallet').textContent = 'MetaMask was not detected. Use Demo Wallet for the presentation; the full React source includes the real wallet flow.';
+          return;
+        }
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        document.getElementById('wallet').textContent = accounts[0];
+      }
+
+      function simulateWallet() {
+        document.getElementById('wallet').textContent = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e saved through the wallet workflow. Alchemy would provide Ethereum RPC reads in production.';
+      }
+
+      function syncAlchemy() {
+        document.getElementById('wallet').textContent = 'Alchemy sync complete: Ethereum RPC reachable, wallet activity checked, latest block data available for backend reads.';
+      }
+    </script>
+  </body>
+</html>
